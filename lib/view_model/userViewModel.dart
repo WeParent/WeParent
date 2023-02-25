@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:weparent/utils/consts.dart';
 
 class UserProfileViewModel {
   final String accessToken;
@@ -9,9 +10,9 @@ class UserProfileViewModel {
   Future<Map<String, dynamic>> getUserProfile() async {
     try {
       final response = await http.get(
-        Uri.parse('http://localhost:9090/user/showProfile'),
+        Uri.parse('$BASE_URL/user/showProfile'),
         headers: {
-          'Authorization': 'Bearer $accessToken',
+          'Authorization': '$accessToken',
         },
       );
 
@@ -32,7 +33,7 @@ class UserProfileViewModel {
     required String profilePhoto,
   }) async {
     final response = await http.put(
-      Uri.parse('http://localhost:9090/user/update'),
+      Uri.parse('$BASE_URL/user/update'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $accessToken',

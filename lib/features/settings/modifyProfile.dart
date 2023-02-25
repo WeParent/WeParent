@@ -1,13 +1,21 @@
+// ignore_for_file: unnecessary_this
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:weparent/models/user.dart';
+import 'package:weparent/utils/consts.dart';
 import '../../view_model/userViewModel.dart';
+import 'package:http/http.dart' as http;
 
 class EditProfilePage extends StatefulWidget {
   final UserProfileViewModel _userProfileViewModel;
+  final String accessToken;
 
   const EditProfilePage({
     Key? key,
     required UserProfileViewModel userProfileViewModel,
+    required this.accessToken,
   })  : _userProfileViewModel = userProfileViewModel,
         super(key: key);
 
@@ -16,7 +24,41 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  bool showPassword = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController FirstNameController = TextEditingController();
+  TextEditingController LastNameController = TextEditingController();
+  TextEditingController EmailController = TextEditingController();
+
+  Future<void> _submitForm() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    final firstName = FirstNameController.text;
+    final lastName = LastNameController.text;
+    final email = EmailController.text;
+    final url = Uri.parse('$BASE_URL/user/update');
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode(
+          {
+            'FirstName': firstName,
+            'LastName': lastName,
+            'Email': email,
+          },
+        ),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': widget.accessToken, // Use widget.accessToken here
+        },
+      );
+      final responseData = json.decode(response.body);
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Updated Successfully')),
+      );
+    }
+  }
 
   @override
   void initState() {
@@ -27,10 +69,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF8F8F8),
       appBar: AppBar(
-        title: const Text('Profile'),
+        backgroundColor: Colors.purpleAccent,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.purpleAccent,
+                Colors.deepPurple,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -54,109 +109,181 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 },
                 child: ListView(
                   children: [
+                    SizedBox(height: 50),
                     Text(
-                      "Edit Profile",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                      "Update your account",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Center(
-                      child: Stack(
+                    SizedBox(height: 5),
+                    Form(
+                      //padding: const EdgeInsets.symmetric(horizontal: 20),
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            width: 130,
-                            height: 130,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 4,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
+                          Text(
+                            'First name',
+                            style: TextStyle(
+                              color: Color(0xFF8A8585),
+                              fontSize: 16,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          TextFormField(
+                            controller: FirstNameController,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter your first name';
+                              }
+                              return null;
+                            },
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(20),
+                              hintText: 'John',
+                              filled: true,
+                              fillColor: Colors.white,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color(0xFFBC539F), width: 2.0),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 10,
-                                  color: Colors.black.withOpacity(0.1),
-                                  offset: Offset(0, 10),
-                                )
-                              ],
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                  user.profilePhoto,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                    BorderSide(color: Color(0xFF8A8585)),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 15),
+                          Text(
+                            'Last name',
+                            style: TextStyle(
+                              color: Color(0xFF8A8585),
+                              fontSize: 16,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          TextFormField(
+                            controller: LastNameController,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(20),
+                              hintText: 'Doe',
+                              filled: true,
+                              fillColor: Colors.white,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color(0xFFBC539F), width: 2.0),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                    BorderSide(color: Color(0xFF8A8585)),
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter your Last name';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 15),
+                          Text(
+                            'Email',
+                            style: TextStyle(
+                              color: Color(0xFF8A8585),
+                              fontSize: 16,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          TextFormField(
+                            controller: EmailController,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(20),
+                              hintText: 'example@domain.com',
+                              filled: true,
+                              fillColor: Colors.white,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color(0xFFBC539F), width: 2.0),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                    BorderSide(color: Color(0xFF8A8585)),
+                              ),
+                            ),
+                            validator: (value) {
+                              //regex
+                              RegExp regex = RegExp(
+                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                              if (value!.isEmpty) {
+                                return "Please enter your email";
+                              } else if (!regex.hasMatch(value)) {
+                                return "Invalid Email!";
+                              }
+                            },
+                          ),
+                          SizedBox(height: 15),
+                          SizedBox(height: 20),
+                          SizedBox(
+                            height: 53,
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                _submitForm();
+                              },
+                              child: Text(
+                                "Update",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Color(0xFFBC539F)),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(26),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  width: 4,
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
+                          SizedBox(height: 25),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Divider(
+                                  color: Color(0xFFBC539F),
+                                  thickness: 1,
                                 ),
-                                color: Colors.green,
                               ),
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.white,
+                              Expanded(
+                                child: Divider(
+                                  color: Color(0xFFBC539F),
+                                  thickness: 1,
+                                ),
                               ),
-                            ),
+                            ],
+                          ),
+                          SizedBox(height: 25),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 35,
-                    ),
-                    buildTextField("First Name", user.firstName, false),
-                    buildTextField("Last Name", user.lastName, false),
-                    buildTextField("E-mail", user.email, false),
-                    buildTextField("Password", "", true),
-                    SizedBox(
-                      height: 35,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        OutlinedButton(
-                          onPressed: () {
-                            // TODO: Handle 'Cancel' button tap.
-                          },
-                          style: OutlinedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(horizontal: 50),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          child: Text(
-                            "CANCEL",
-                            style: TextStyle(
-                                fontSize: 14,
-                                letterSpacing: 2.2,
-                                color: Colors.black),
-                          ),
-                        ),
-                        SizedBox(width: 16),
-                        GestureDetector(onTap: () {
-                          // TODO: Handle 'Save' button tap.
-                          var updateUserProfile = widget._userProfileViewModel
-                              .updateUserProfile(
-                                  firstName: '',
-                                  lastName: '',
-                                  email: '',
-                                  profilePhoto: '');
-                        }),
-                      ],
                     ),
                   ],
                 ),
@@ -168,39 +295,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
             );
           }
         },
-      ),
-    );
-  }
-
-  Widget buildTextField(
-      String labelText, String placeholder, bool isPasswordTextField) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 35.0),
-      child: TextField(
-        obscureText: isPasswordTextField ? showPassword : false,
-        decoration: InputDecoration(
-            suffixIcon: isPasswordTextField
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        showPassword = !showPassword;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.grey,
-                    ),
-                  )
-                : null,
-            contentPadding: EdgeInsets.only(bottom: 3),
-            labelText: labelText,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintText: placeholder,
-            hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            )),
       ),
     );
   }
