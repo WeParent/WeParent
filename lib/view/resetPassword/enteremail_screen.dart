@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'dart:convert';
 import '/utils/constants.dart' as constants;
 
@@ -93,11 +94,11 @@ class _EnterEmailState extends State<EnterEmail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Color(0xFFBC539F)),
         title: const Text("Password recovery"),
-        backgroundColor: Colors.white,
+
         shadowColor: Colors.white,
         centerTitle: true,
         titleSpacing: 0.0,

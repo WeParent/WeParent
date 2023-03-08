@@ -8,6 +8,7 @@ import 'package:weparent/view/blockedApps/BlockedApps.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:weparent/view/home/child_item.dart';
 
+
 class home_screen extends StatelessWidget {
 
   final List<ChildCard> children = [
@@ -21,7 +22,7 @@ class home_screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+    
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Color(0xFFBC539F)),
         title: const Text.rich(
@@ -37,7 +38,7 @@ class home_screen extends StatelessWidget {
             ],
           ),
         ),
-        backgroundColor: Colors.white,
+       
           automaticallyImplyLeading: false,
         foregroundColor: const Color(0xFFBC539F),
         centerTitle: true,

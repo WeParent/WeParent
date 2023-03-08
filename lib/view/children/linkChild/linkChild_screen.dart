@@ -3,11 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
 
+
 class LinkChildScreen extends StatelessWidget {
+
   LinkChildScreen({Key? key}) : super(key: key);
+
   final pages = [
     PageViewModel(
-      pageColor: Colors.white,
       bubbleBackgroundColor: Color(0xFFBC539F),
       body: Column(children: [
         Center(
@@ -27,7 +29,7 @@ class LinkChildScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
-                      color: Colors.black),
+                    ),
                 ),
               ],
             ),
@@ -54,7 +56,7 @@ class LinkChildScreen extends StatelessWidget {
                 text: "Download our Junior app\n",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+
                   fontSize: 20,
                 ),
                 children: [
@@ -64,7 +66,7 @@ class LinkChildScreen extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
-                        color: Colors.white),
+                       ),
                   ),
                 ],
               ),
@@ -82,7 +84,6 @@ class LinkChildScreen extends StatelessWidget {
     ),
     PageViewModel(
       bubbleBackgroundColor: Color(0xFFBC539F),
-      pageColor: Colors.white,
       body: Column(children: [
         Center(
           child: RichText(
@@ -101,7 +102,7 @@ class LinkChildScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
-                      color: Colors.black),
+                      ),
                 ),
               ],
             ),
@@ -128,7 +129,7 @@ class LinkChildScreen extends StatelessWidget {
               text: "Scan child QR code\n",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+
                 fontSize: 20,
               ),
               children: [
@@ -138,7 +139,7 @@ class LinkChildScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
-                      color: Colors.white),
+                      ),
                 ),
               ],
             ),
@@ -178,7 +179,7 @@ class LinkChildScreen extends StatelessWidget {
           ),
         ),
       ]),
-      bodyTextStyle: const TextStyle(fontSize: 18, color: Colors.black),
+      bodyTextStyle: const TextStyle(fontSize: 18),
       mainImage: Image.asset(
         'Assets/scanqr.png',
         height: 350.0,
@@ -190,8 +191,8 @@ class LinkChildScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Color(0xFFBC539F)),
           title: const Text.rich(
@@ -207,7 +208,6 @@ class LinkChildScreen extends StatelessWidget {
               ],
             ),
           ),
-          backgroundColor: Colors.white,
           centerTitle: true,
           titleSpacing: 0.0,
           foregroundColor: const Color(0xFFBC539F),
@@ -223,7 +223,7 @@ class LinkChildScreen extends StatelessWidget {
                   showBackButton: false,
 
                   pageButtonTextStyles: const TextStyle(
-                    color: Colors.black38,
+
                     fontSize: 17.0,
                   ),
                 )));

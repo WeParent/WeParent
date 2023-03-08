@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key});
 
@@ -93,7 +94,6 @@ class _ScanScreenState extends State<ScanScreen> {
             ],
           )
         ),
-        backgroundColor: Colors.white,
         centerTitle: true,
         titleSpacing: 0.0,
         foregroundColor: const Color(0xFFBC539F),

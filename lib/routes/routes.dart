@@ -9,14 +9,17 @@ import 'package:weparent/view/navbar/navBar.dart';
 import 'package:weparent/view/children/linkChild/linkChild_screen.dart';
 import 'package:weparent/view/children/linkChild/scanQR/scan_screen.dart';
 import 'package:weparent/view/navbar/navbar_with_settings_as_first.dart';
+import 'package:weparent/view/settings/manageAccount/changePassword/changepassword_screen.dart';
 import '../view/ResetPassword/enterotp_screen.dart';
 import '../view/settings/manageAccount/manageaccount_screen.dart';
-import '../view/settings/manageAccount/editprofile_screen.dart';
+import '../view/settings/manageAccount/editAccount/editprofile_screen.dart';
 import '../view/signup/emailverification_screen.dart';
 import '../view/signup/emailverificationwarning_screen.dart';
+import '../view/splash/splash_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
-  '/': (context) => SplashScreen(),
+  '/welcome': (context) => WelcomeScreen(),
+  '/':(context) => SplashScreen(),
   '/login': (context) => SignIn(),
   '/register': (context) => SignUp(),
   '/emailReset': (context) => EnterEmail(),
@@ -29,5 +32,6 @@ final Map<String, WidgetBuilder> routes = {
   '/scan': (context) => ScanScreen(),
   '/linkchild': (context) => LinkChildScreen(),
   '/manageaccount':(context) => ManageAccount(),
-  '/editprofile':(context) => EditProfile()
+  '/editprofile':(context) => EditProfile(),
+  '/changepassword':(context) => ChangePassword()
 };

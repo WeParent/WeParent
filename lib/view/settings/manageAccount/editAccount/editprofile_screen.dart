@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weparent/routes/routes.dart';
+
 import 'package:weparent/view/navbar/navbar.dart';
 import '/utils/constants.dart' as constants;
 
@@ -169,8 +170,8 @@ class _EditProfileState extends State<EditProfile> {
         Future.delayed(Duration(milliseconds: 1000), () {
        
        
-   //  Navigator.pushNamedAndRemoveUntil(context,'/navbar2',ModalRoute.withName('/navbar'));
-    Navigator.pushNamed(context, '/navbar2');
+  Navigator.pushNamedAndRemoveUntil(context,'/navbar2',ModalRoute.withName('/navbar'));
+  //  Navigator.pop(context, '/navbar2');
 
 
         });
@@ -229,7 +230,7 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+
       appBar: AppBar(
           iconTheme: const IconThemeData(color: Color(0xFFBC539F)),
           title: const Text.rich(
@@ -245,7 +246,7 @@ class _EditProfileState extends State<EditProfile> {
               ],
             ),
           ),
-          backgroundColor: Colors.white,
+
           foregroundColor: const Color(0xFFBC539F),
           centerTitle: true),
       body: SingleChildScrollView(
@@ -268,7 +269,7 @@ class _EditProfileState extends State<EditProfile> {
                                     FileImage(File(_imageFile!.path)),
                               )
                             : CircleAvatar(
-                                radius: 100,
+                                radius: 90,
                                 backgroundColor: Colors.white,
                                 foregroundImage: NetworkImage(_photo),
                               )))),
@@ -332,8 +333,8 @@ class _EditProfileState extends State<EditProfile> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(20),
-                      filled: true,
-                      fillColor: Colors.white,
+
+
                       focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Color(0xFFBC539F), width: 2.0),
@@ -358,8 +359,9 @@ class _EditProfileState extends State<EditProfile> {
                     controller: LastNameController,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(20),
-                      filled: true,
-                      fillColor: Colors.white,
+
+
+
                       focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Color(0xFFBC539F), width: 2.0),
@@ -391,7 +393,7 @@ class _EditProfileState extends State<EditProfile> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(20),
-                      filled: true,
+
                       fillColor: Colors.white,
                       focusedBorder: OutlineInputBorder(
                         borderSide:

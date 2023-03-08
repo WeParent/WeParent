@@ -23,7 +23,6 @@ class _EmailVerificationWarningScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(16),
@@ -41,10 +40,10 @@ class _EmailVerificationWarningScreenState
               ),
               SizedBox(height: 30),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(left: 55.0),
                 child: Image.asset(
                   'Assets/warning.png', // replace with your own image path
-                  height: 290,
+                  height: 250,
 
                   fit: BoxFit.contain,
                 ),
@@ -58,7 +57,7 @@ class _EmailVerificationWarningScreenState
                   color: Color(0xFF868686),
                 ),
               ),
-              SizedBox(height: 90),
+              SizedBox(height: 120),
               SizedBox(
                 height: 55,
                 width: 330,
@@ -93,10 +92,8 @@ class _EmailVerificationWarningScreenState
                   Center(
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.popUntil(
-                            context,
-                            ModalRoute.withName('/login')
-                        );
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/login', ModalRoute.withName('/welcome'));
                       },
                       child: const Text(
                         "Leave",

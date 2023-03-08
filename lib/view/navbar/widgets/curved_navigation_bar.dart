@@ -10,7 +10,7 @@ class CurvedNavigationBar extends StatefulWidget {
   final int index;
   final Color color;
   final Color? buttonBackgroundColor;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final ValueChanged<int>? onTap;
   final _LetIndexPage letIndexChange;
   final Curve animationCurve;
@@ -23,12 +23,12 @@ class CurvedNavigationBar extends StatefulWidget {
     this.index = 0,
     this.color = Colors.white,
     this.buttonBackgroundColor,
-    this.backgroundColor = Colors.blueAccent,
+   
     this.onTap,
     _LetIndexPage? letIndexChange,
     this.animationCurve = Curves.easeOut,
     this.animationDuration = const Duration(milliseconds: 600),
-    this.height = 60.0,
+    this.height = 60.0, this.backgroundColor,
   })  : letIndexChange = letIndexChange ?? ((_) => true),
         assert(items != null),
         assert(items.length >= 1),

@@ -1,15 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 import '../login/login_screen.dart';
 import '../signup/signup_screen.dart';
 
-class SplashScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
+
+  const WelcomeScreen({super.key});
+
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+
+  
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+
+
+
+
+@override
+void initState() {
+    // TODO: implement initState
+    super.initState();
+
+
+ 
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8F8F8),
+   
       body: Container(
-        color: Colors.white,
+       
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -22,7 +49,7 @@ class SplashScreen extends StatelessWidget {
             Text(
               "Welcome!",
               style: TextStyle(
-                color: Colors.black,
+               
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
               ),

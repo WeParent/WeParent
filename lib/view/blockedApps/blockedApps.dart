@@ -52,6 +52,7 @@ class _BlockedAppsState extends State<BlockedApps> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+  
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Color(0xFFBC539F)),
         title: const Text.rich(
@@ -67,7 +68,7 @@ class _BlockedAppsState extends State<BlockedApps> {
             ],
           ),
         ),
-        backgroundColor: Colors.white,
+       
         foregroundColor: const Color(0xFFBC539F),
         centerTitle: true,
       ),

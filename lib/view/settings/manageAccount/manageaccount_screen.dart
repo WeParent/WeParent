@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weparent/view/ResetPassword/enteremail_screen.dart';
-import 'package:weparent/view/settings/manageAccount/editprofile_screen.dart';
+import 'package:weparent/view/settings/manageAccount/editAccount/editprofile_screen.dart';
 import 'package:weparent/model/user.dart';
 import '../../../viewmodel/userViewModel.dart';
 
@@ -50,7 +50,7 @@ class _ManageAccountState extends State<ManageAccount> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      backgroundColor: Colors.white,
+
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Color(0xFFBC539F)),
         title: const Text.rich(
@@ -66,7 +66,6 @@ class _ManageAccountState extends State<ManageAccount> {
             ],
           ),
         ),
-        backgroundColor: Colors.white,
         foregroundColor: const Color(0xFFBC539F),
         centerTitle: true,
       ),
@@ -76,18 +75,18 @@ class _ManageAccountState extends State<ManageAccount> {
           child: ListView(
             children: [
              Padding(
-                  padding: const EdgeInsets.all(30.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 70,vertical: 20),
                   child: ClipOval(
                     child: CircleAvatar(
                     
-                      radius: 120, 
+                      radius:110,
                       backgroundImage: NetworkImage(_photo),
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Colors.grey.shade300,
+                          color: Color(0xFFBC539F),
                           width: 5.0,
                         ),
                       ),
@@ -114,7 +113,9 @@ class _ManageAccountState extends State<ManageAccount> {
                   CustomListTile(
                     title: "Change password",
                     icon: Icons.password,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/changepassword');
+                    },
                   ),
                   CustomListTile(
                     color: Colors.red,

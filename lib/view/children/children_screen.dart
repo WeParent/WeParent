@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 import '../../model/child.dart';
 
 
@@ -21,7 +22,7 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+   
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: <Widget>[IconButton(
@@ -46,7 +47,7 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
           ),
         ),
         
-        backgroundColor: Colors.white,
+    
         centerTitle: true,
         titleSpacing: 0.0,
         foregroundColor: const Color(0xFFBC539F),

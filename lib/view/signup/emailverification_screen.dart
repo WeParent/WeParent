@@ -92,13 +92,11 @@ class _EmailVerificationScreenState extends State<EmailVerification> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Color(0xFFBC539F)),
         title: const Text("Email verification"),
-        backgroundColor: Colors.white,
         shadowColor: Colors.white,
         centerTitle: true,
         titleSpacing: 0.0,
         foregroundColor: const Color(0xFFBC539F),
       ),
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(16),

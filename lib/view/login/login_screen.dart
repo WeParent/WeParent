@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:weparent/view/navbar/navbar.dart';
 import 'package:weparent/view/welcome/welcome_screen.dart';
 import '../ResetPassword/enteremail_screen.dart';
@@ -39,11 +40,13 @@ class _SignInState extends State<SignIn> {
       var verified = data['Verified'];
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('Token', data['Token']);
-      prefs.setString('FirstName', data['FirstName']);
+
       prefs.setString('FirstName', data['FirstName']);
       prefs.setString('LastName', data['LastName']);
       prefs.setString('ProfilePhoto', data['ProfilePhoto']);
       prefs.setString('Email', data['Email']);
+       prefs.setBool('isLoggedIn', true);
+      prefs.setBool('Verified', data['Verified']);
       // Login successful, navigate to home screen
       if ( verified == true ) {
         Navigator.pushNamed(context, '/navbar');
@@ -84,12 +87,13 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
+     
+    
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Color(0xFFBC539F)),
         title: const Text("Login"),
-        backgroundColor: Colors.white,
-        shadowColor: Colors.white,
+    
+      
         centerTitle: true,
         titleSpacing: 0.0,
         foregroundColor: const Color(0xFFBC539F),
@@ -104,7 +108,7 @@ class _SignInState extends State<SignIn> {
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                
               ),
             ),
             const SizedBox(height: 5),
@@ -146,8 +150,8 @@ class _SignInState extends State<SignIn> {
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(20),
                       hintText: '',
-                      filled: true,
-                      fillColor: Colors.white,
+
+              
                       focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Color(0xFFBC539F), width: 2.0),
@@ -180,8 +184,8 @@ class _SignInState extends State<SignIn> {
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(20),
                     
-                      filled: true,
-                      fillColor: Colors.white,
+
+                   
                       focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Color(0xFFBC539F), width: 2.0),
@@ -240,7 +244,7 @@ class _SignInState extends State<SignIn> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
-                        width: 330,
+                        width: 323,
 
                         height: 40,
                         child: OutlinedButton(

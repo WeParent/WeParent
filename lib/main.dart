@@ -1,27 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:weparent/view//signup/signup_screen.dart';
-import 'package:weparent/routes/routes.dart';
-import 'package:weparent/view/blockedApps/blockedApps.dart';
-import 'package:weparent/view/home/home_screen.dart';
-import 'package:weparent/view/navbar/navbar.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'view//ResetPassword/enterotp_screen.dart';
-import 'view//login/login_screen.dart';
-import 'view//welcome/welcome_screen.dart';
-import 'view/ResetPassword/enteremail_screen.dart';
+
+import 'package:weparent/utils/themeManager.dart';
+import 'package:weparent/routes/routes.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(create: (context) => ThemeManager(),
+  child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+
+
+ @override
+  void initState() {
+    super.initState();
+
+  }
+
+ final ThemeData myDarkTheme = ThemeData.dark().copyWith(
+   //customize dark theme
+ );
+
   @override
   Widget build(BuildContext context) {
+final manager = Provider.of<ThemeManager>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme:  ThemeData(
+        appBarTheme: AppBarTheme( backgroundColor: Colors.white)
+      ),
+
+       darkTheme: myDarkTheme,
+       themeMode: manager.themeMode,
+
 
       //home: SignIn(),
       //home: SignUp(),

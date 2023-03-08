@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:weparent/view/children/children_screen.dart';
 import 'package:weparent/view/home/home_screen.dart';
 import 'package:weparent/view/navbar/widgets/curved_navigation_bar.dart';
@@ -70,9 +71,9 @@ class _NavBar2State extends State<NavBar2> {
               ],
               color: Color(0xFFBC539F),
               buttonBackgroundColor: Color(0xFFBC539F),
-              backgroundColor: Colors.white,
+            
               animationCurve: Curves.easeInOut,
-              animationDuration: const Duration(milliseconds: 400),
+              animationDuration: const Duration(milliseconds: 350),
               index: _selectedIndex,
               onTap: _onItemTapped)),
     );
