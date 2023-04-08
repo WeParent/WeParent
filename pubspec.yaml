@@ -45,6 +45,8 @@ dependencies:
   intro_views_flutter: ^3.2.0
   image_picker: ^0.8.6+4
   provider: ^6.0.1
+  percent_indicator: ^4.2.3
+  numberpicker: ^2.1.1
 
 
   
