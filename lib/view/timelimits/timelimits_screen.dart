@@ -1,11 +1,15 @@
 import 'dart:async';
+import 'dart:ffi';
+import 'dart:io';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:http/http.dart' as http;
+import 'package:socket_io_client/socket_io_client.dart';
 import 'dart:convert';
 import '/utils/constants.dart' as constants;
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class ScreenTimeLimitScreen extends StatefulWidget {
   @override
@@ -17,10 +21,24 @@ class _ScreenTimeLimitScreenState extends State<ScreenTimeLimitScreen> {
   int _minutes = 0;
   int _remainingTime = 0;
   late Timer _timer;
+  late IO.Socket socket;
 
   @override
   void initState() {
     super.initState();
+
+    socket = io(
+        'http://192.168.1.5:9090',
+        OptionBuilder()
+            .setTransports(['websocket']) // for Flutter or Dart VM
+            .disableAutoConnect() // disable auto-connection
+            .build());
+    socket.connect();
+    socket.emit("connection");
+    socket.on("connect", (_) {
+      print("Connected to server!");
+    });
+
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {});
     _timer.cancel();
   }
@@ -29,6 +47,7 @@ class _ScreenTimeLimitScreenState extends State<ScreenTimeLimitScreen> {
     final url = Uri.parse('${constants.SERVER_URL}/parent');
     setState(() {
       _remainingTime = _hours * 60 + _minutes;
+      socket.emit("remaining_time", _remainingTime);
     });
     _timer.cancel();
     _timer = Timer.periodic(Duration(minutes: 1), (timer) {
@@ -40,11 +59,12 @@ class _ScreenTimeLimitScreenState extends State<ScreenTimeLimitScreen> {
         }
       });
     });
+
     try {
       final response = await http.post(
         url,
         body: jsonEncode({
-          "childId": "642370452dc3b0a0a24edeac",
+          "childId": "6439defcf453ffa2a9aa8b42",
           'timeLimit': _remainingTime
         }),
         headers: {'Content-Type': 'application/json'},
@@ -60,6 +80,11 @@ class _ScreenTimeLimitScreenState extends State<ScreenTimeLimitScreen> {
       // An error occurred while trying to set the time limit
       print('An error occurred while trying to set the time limit');
     }
+
+    // Listen to events from the server
+    socket.on("eventName", (data) {
+      // Handle the data received from the server
+    });
   }
 
   String _formatTime(int time) {
@@ -72,6 +97,12 @@ class _ScreenTimeLimitScreenState extends State<ScreenTimeLimitScreen> {
     int totalMinutes = (_hours * 60) + _minutes;
     double remainingMinutes = _remainingTime.clamp(0, totalMinutes).toDouble();
     return remainingMinutes / totalMinutes;
+  }
+
+  @override
+  void dispose() {
+    socket.disconnect();
+    super.dispose();
   }
 
   @override
