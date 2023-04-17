@@ -1,16 +1,18 @@
 import 'dart:async';
 import 'dart:collection';
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:platform_device_id/platform_device_id.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:socket_io_common/src/util/event_emitter.dart';
 import 'package:weparent/model/app.dart';
+import 'package:weparent/utils/receivedlocation.dart';
 import 'package:weparent/view/map/constant.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -41,28 +43,46 @@ class mapsState extends State<map> {
 
   //updateLocation taaytelha init state
   void UpdateLocation() async {
-     socket = io('http://192.168.100.7:9090',
+    //lezemna nalkawoulha 7al
+    String? result = await PlatformDeviceId.getDeviceId;
+    print("buildId est $result");
+     socket = io('http://172.16.1.96:9090',
         OptionBuilder()
             .setTransports(['websocket']) // for Flutter or Dart VM
-            .disableAutoConnect()  // disable auto-connection
+            .enableAutoConnect() // disable auto-connection²
+            .setQuery({"buildId": result})
             .build()
+
     );
     socket.connect();
-    socket.emit("ConnectionParent");
+    socket.emit("connection");
+    socket.on("location", (data) {
 
-    socket.on("Longitude", (data) => {
-        _Longitude = data,
-      print("this is long $_Longitude"),});
 
-     socket.on("Latitude", (data) => {
-       _Latitude = data,
-       print("this is lat $_Latitude")});
+      final regex = RegExp(r'([-\d.]+)');
+      final matches = regex.allMatches(data);
+
+      final parsedlatitude = double.parse(matches.elementAt(0).group(0)!);
+      final parsedlongitude = double.parse(matches.elementAt(1).group(0)!);
+
+      final loc = receivedlocation(parsedlatitude.toString(), parsedlongitude.toString());
+      setState(() {
+    _Latitude = double.parse(loc.latitude!);
+    _Longitude = double.parse(loc.longitude!);
+
+
+       });
+    });
   }
 
   @override
    initState()  {
-    UpdateLocation();
+    _Longitude = 20.1550121;
+    _Latitude = 30.8650623;
+
     super.initState();
+    points.clear();
+    UpdateLocation();
     // wait for the Future to complete before continuing
 
 
@@ -137,7 +157,8 @@ class mapsState extends State<map> {
       GoogleMap(
          initialCameraPosition: CameraPosition(
            target: LatLng(
-               _Latitude!, _Longitude!),
+               _Latitude!, _Longitude!)
+           ,
 
                 zoom: 18.5,
          ),

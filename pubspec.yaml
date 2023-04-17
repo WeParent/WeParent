@@ -49,6 +49,8 @@ dependencies:
   google_maps_flutter: ^2.2.5
   location: ^4.4.0
   socket_io_client: ^2.0.1
+  platform_device_id: ^1.0.1
+
 
 
   
