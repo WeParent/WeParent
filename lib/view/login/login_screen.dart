@@ -40,11 +40,14 @@ class _SignInState extends State<SignIn> {
       var verified = data['Verified'];
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('Token', data['Token']);
-
+      print(data['SafeZonePoint1']);
       prefs.setString('FirstName', data['FirstName']);
       prefs.setString('LastName', data['LastName']);
       prefs.setString('ProfilePhoto', data['ProfilePhoto']);
-      prefs.setString('Email', data['Email']);
+      prefs.setString('SafeZonePoint1', data['SafeZonePoint1'].toString());
+      prefs.setString('SafeZonePoint2', data['SafeZonePoint2'].toString());
+      prefs.setString('SafeZonePoint3', data['SafeZonePoint3'].toString());
+      prefs.setString('SafeZonePoint4', data['SafeZonePoint4'].toString());
        prefs.setBool('isLoggedIn', true);
       prefs.setBool('Verified', data['Verified']);
       // Login successful, navigate to home screen

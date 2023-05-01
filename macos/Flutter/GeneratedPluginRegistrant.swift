@@ -5,14 +5,12 @@
 import FlutterMacOS
 import Foundation
 
-import location
 import mobile_scanner
 import platform_device_id
 import platform_device_id_macos
 import shared_preferences_foundation
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  LocationPlugin.register(with: registry.registrar(forPlugin: "LocationPlugin"))
   MobileScannerPlugin.register(with: registry.registrar(forPlugin: "MobileScannerPlugin"))
   PlatformDeviceIdMacosPlugin.register(with: registry.registrar(forPlugin: "PlatformDeviceIdMacosPlugin"))
   PlatformDeviceIdMacosPlugin.register(with: registry.registrar(forPlugin: "PlatformDeviceIdMacosPlugin"))
