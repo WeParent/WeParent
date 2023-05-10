@@ -28,7 +28,7 @@ class _ScreenTimeLimitScreenState extends State<ScreenTimeLimitScreen> {
     super.initState();
 
     socket = io(
-        'http://192.168.1.5:9090',
+        'http://172.16.5.67:9090',
         OptionBuilder()
             .setTransports(['websocket']) // for Flutter or Dart VM
             .disableAutoConnect() // disable auto-connection

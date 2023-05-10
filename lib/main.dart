@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:ffi';
 
 import 'package:weparent/utils/themeManager.dart';
 import 'package:weparent/routes/routes.dart';
+import 'package:weparent/view/Stats/stats_screen.dart';
 import 'package:weparent/view/timelimits/timelimits_screen.dart';
 
 void main() {
@@ -35,15 +37,18 @@ class _MyAppState extends State<MyApp> {
     final manager = Provider.of<ThemeManager>(context);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme:
-            ThemeData(appBarTheme: AppBarTheme(backgroundColor: Colors.white)),
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(backgroundColor: Colors.white),
+          fontFamily: 'Montserrat',
+        ),
         darkTheme: myDarkTheme,
         themeMode: manager.themeMode,
 
         //home: SignIn(),
         //home: SignUp(),
         //home: EnterEmail()
-        home: ScreenTimeLimitScreen()
+        //home: ScreenTimeLimitScreen()
+        home: StatsScreen()
         //routes: routes,
         );
   }
