@@ -5,6 +5,7 @@ import 'package:weparent/view//login/login_screen.dart';
 import 'package:weparent/view//signup/signup_screen.dart';
 import 'package:weparent/view//welcome/welcome_screen.dart';
 import 'package:weparent/view/children/children_screen.dart';
+import 'package:weparent/view/controls/controls_screen.dart';
 import 'package:weparent/view/home/home_screen.dart';
 import 'package:weparent/view/navbar/navBar.dart';
 import 'package:weparent/view/children/linkChild/linkChild_screen.dart';
@@ -30,6 +31,7 @@ final Map<String, WidgetBuilder> routes = {
   '/passwordreset':(context) => PasswordResetScreen(),
   '/navbar':(context) => NavBar(),
   '/children':(context) => ChildrenScreen(),
+  '/controls':(context) => ControlsScreen(),
     '/navbar2':(context) => const NavBar2(),
   '/scan': (context) => ScanScreen(),
   '/linkchild': (context) => LinkChildScreen(),

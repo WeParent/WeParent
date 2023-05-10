@@ -44,6 +44,7 @@ class mapsState extends State<map> {
   List<LatLng> points = [];
   List<LatLng> serverPoints = [];
 
+
   //updateLocation taaytelha init state
   void UpdateLocation() async {
     String? buildId = await getBuildId();
@@ -109,7 +110,6 @@ class mapsState extends State<map> {
         final prefs = await SharedPreferences.getInstance();
         prefs.setString('LASTLATITUDE', loc.latitude.toString());
         prefs.setString('LASTLONGITUDE', loc.longitude.toString());
-
         setState(() {
           _Latitude = double.parse(loc.latitude!);
           _Longitude = double.parse(loc.longitude!);
@@ -306,6 +306,7 @@ class mapsState extends State<map> {
 
   @override
   void dispose() {
+    socket.dispose();
     super.dispose();
   }
 
@@ -411,6 +412,7 @@ class mapsState extends State<map> {
               markers: {
                 Marker(
                   markerId: const MarkerId("currentLocation"),
+
                   position: LatLng(
                       //_latitude
                       _Latitude!,

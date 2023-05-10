@@ -50,6 +50,7 @@ dependencies:
   socket_io_client: ^2.0.1
   platform_device_id: ^1.0.1
   maps_toolkit: ^2.0.1
+  fl_chart: ^0.62.0
 
 
   

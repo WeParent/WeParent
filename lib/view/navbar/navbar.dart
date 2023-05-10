@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:weparent/view/children/children_screen.dart';
 import 'package:weparent/view/home/home_screen.dart';
+import 'package:weparent/view/controls/controls_screen.dart';
 import 'package:weparent/view/navbar/widgets/curved_navigation_bar.dart';
 import 'package:weparent/view/map/map.dart';
 import 'package:weparent/view/settings/settings_screen.dart';
@@ -36,12 +37,7 @@ class _NavBarState extends State<NavBar> {
   int _backButtonTapCount = 0;
 
 
-
-
-
-
-
-  final List<Widget> _screens = [home_screen(), const ChildrenScreen(), map(), Settings()];
+  final List<Widget> _screens = [home_screen(), ChildrenScreen(), map(), Settings()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -95,7 +91,7 @@ class _NavBarState extends State<NavBar> {
           bottomNavigationBar: CurvedNavigationBar(
               items: const <Widget>[
                 Icon(Icons.home, size: 25, color: Colors.white),
-                Icon(Icons.phonelink, size: 25, color: Colors.white),
+                Icon(Icons.phonelink_setup, size: 25, color: Colors.white),
                 Icon(Icons.map, size: 25, color: Colors.white),
                 Icon(Icons.settings, size: 25, color: Colors.white),
               ],

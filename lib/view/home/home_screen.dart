@@ -4,13 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:weparent/model/child.dart';
 import 'package:weparent/model/childcard.dart';
 import 'package:weparent/view/blockedApps/BlockedApps.dart';
+import 'package:weparent/view/home/stats_screen.dart';
 import '/utils/constants.dart' as constants;
 
 import 'package:platform_device_id/platform_device_id.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:weparent/view/home/child_item.dart';
 
 
 class home_screen extends StatefulWidget {
@@ -20,14 +20,6 @@ class home_screen extends StatefulWidget {
 }
 
 class _home_screenState extends State<home_screen> {
-  final List<ChildCard> children = [
-    ChildCard(
-      image: 'Assets/ahmed.png',
-      name: 'Yassin',
-    ),
-    ChildCard(image: 'Assets/yassin.png', name: 'Ahmed'),
-    ChildCard(image: 'Assets/salma.png', name: 'Salma'),
-  ];
 
   late IO.Socket socket;
 
@@ -85,30 +77,7 @@ class _home_screenState extends State<home_screen> {
         foregroundColor: const Color(0xFFBC539F),
         centerTitle: true,
       ),
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(25, 38, 20, 0),
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Color(0xFFBC539F), width: 1),
-              ),
-              child: Icon(Icons.person_add_alt_1_rounded),
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.zero,
-              children: children.map((child) => ChildItem(child)).toList(),
-            ),
-          ),
-        ],
-      ),
+      body: StatsScreen()
     );
   }
 }

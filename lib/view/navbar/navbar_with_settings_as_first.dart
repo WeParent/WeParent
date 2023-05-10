@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:weparent/view/children/children_screen.dart';
+import 'package:weparent/view/controls/controls_screen.dart';
 import 'package:weparent/view/home/home_screen.dart';
 import 'package:weparent/view/navbar/widgets/curved_navigation_bar.dart';
 import 'package:weparent/view/map/map.dart';
@@ -20,7 +21,7 @@ class NavBar2 extends StatefulWidget {
 class _NavBar2State extends State<NavBar2> {
   int _selectedIndex = 3;
   int _backButtonTapCount = 0;
-  final List<Widget> _screens = [home_screen(), const ChildrenScreen(), map(), Settings()];
+  final List<Widget> _screens = [home_screen(), ControlsScreen(), map(), Settings()];
 
   @override
   void initState() {
@@ -65,7 +66,7 @@ class _NavBar2State extends State<NavBar2> {
           bottomNavigationBar: CurvedNavigationBar(
               items: const <Widget>[
                 Icon(Icons.home, size: 25, color: Colors.white),
-                Icon(Icons.phonelink, size: 25, color: Colors.white),
+                Icon(Icons.phonelink_setup, size: 25, color: Colors.white),
                 Icon(Icons.map, size: 25, color: Colors.white),
                 Icon(Icons.settings, size: 25, color: Colors.white),
               ],

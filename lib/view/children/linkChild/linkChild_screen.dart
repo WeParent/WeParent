@@ -14,15 +14,6 @@ class LinkChildScreen extends StatelessWidget {
   LinkChildScreen({Key? key}) : super(key: key);
 
 
-
-
-
-
-
-
-
-
-
   final pages = [
     PageViewModel(
       bubbleBackgroundColor: Color(0xFFBC539F),
