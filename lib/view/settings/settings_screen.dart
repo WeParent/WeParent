@@ -48,6 +48,7 @@ class _SettingsPage2State extends State<Settings> {
     await prefs.setBool("isLoggedIn", false);
     Navigator.pushNamedAndRemoveUntil(
         context, '/login', ModalRoute.withName('/welcome'));
+    prefs.clear();
   }
 
   @override

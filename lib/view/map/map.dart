@@ -155,10 +155,6 @@ class mapsState extends State<map> {
       final pt4 = data['SafeZonePoint4'];
 
 
-
-
-
-
         setState(() {
           _point1 = LatLng(
               double.parse(pt1.split('+')[0]), double.parse(pt1.split('+')[1]));

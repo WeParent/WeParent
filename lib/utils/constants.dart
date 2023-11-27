@@ -1,1 +1,1 @@
-const String SERVER_URL = "http://192.168.1.124:9090";
+const String SERVER_URL = "http://172.16.10.171:9090";

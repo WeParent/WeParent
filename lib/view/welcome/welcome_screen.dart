@@ -79,7 +79,7 @@ void initState() {
                       "Already a member",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 18,
+                        fontSize: 10,
                       ),
                     ),
                     style: ButtonStyle(
@@ -107,7 +107,7 @@ void initState() {
                       Navigator.pushNamed(context, "/register");
                     },
                     child: Text(
-                      "Become a member",
+                      "Sign In",
                       style: TextStyle(
                         color: Color(0xFFBC539F),
                         fontSize: 18,

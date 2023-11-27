@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:platform_device_id/platform_device_id.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '/utils/constants.dart' as constants;
 import 'emailverification_screen.dart';
@@ -20,6 +21,12 @@ class _SignUpState extends State<SignUp> {
   TextEditingController EmailController = TextEditingController();
   TextEditingController PasswordController = TextEditingController();
 
+  Future<String?> getBuildId() async {
+    String? result = await PlatformDeviceId.getDeviceId;
+    return result;
+  }
+
+
   Future<void> _submitForm() async {
     if (!_formKey.currentState!.validate()) {
       return;
@@ -35,7 +42,7 @@ class _SignUpState extends State<SignUp> {
         context,
         MaterialPageRoute(builder: (context) => LoadingScreen()),
       );*/
-
+    final buildId = await getBuildId();
       final response = await http.post(
         url,
         body: json.encode(
@@ -44,6 +51,7 @@ class _SignUpState extends State<SignUp> {
             'LastName': LastName,
             'Email': Email,
             'Password': Password,
+            'BuildId': buildId,
           },
         ),
         headers: {'Content-Type': 'application/json'},
@@ -157,23 +165,28 @@ else {
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
           children: [
-            SizedBox(height: 30),
-            const Text(
-              "Create your account",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+           const  SizedBox(height: 30),
+            const Column(
+              children:  [
+                Text(
+                  "Create your account",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
        
-              ),
-            ),
-            SizedBox(height: 5),
-            const Text(
+                  ),
+                ),
+                 SizedBox(height: 5),
+            Text(
               "Please enter your informations",
               style: TextStyle(
                 fontSize: 15,
                 color: Color(0xFF868686),
               ),
             ),
+              ],
+            ),
+           
             SizedBox(height: 40),
             Form(
               //padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -353,51 +366,7 @@ else {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 15),
-                 SizedBox(
-                        width: 330,
-                        
-                        height: 40,
-                        child: OutlinedButton(
-                          onPressed: () {},
-                        
-                          style: ButtonStyle(
-                            side: MaterialStateProperty.all<BorderSide>(
-                              BorderSide(color: Color(0xFFBC539F),width: 2
-                              ),
-                            ),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(28.0),
-                              ),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: Image.asset(
-                                  "Assets/google.png", // Replace with the path to your asset image
-                                  
-                                  // Set the height of the image to match the text
-                                ),
-                              ),
-                              SizedBox(width: 10), // Add some spacing between the image and text
-                              Text(
-                                "Continue with Google",
-                                style: TextStyle(
-                                  color: Color(0xFFBC539F),
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-
-                      ),
-                 SizedBox(height: 30)
+              
                 ],
               ),
             ),

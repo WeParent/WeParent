@@ -431,7 +431,11 @@ class _ControlsScreenState extends State<ControlsScreen> {
                   margin: new EdgeInsets.all(15.0),
                   child: Container(
                     child:  InkWell(
-                      onTap: () {},
+                      onTap: () {
+
+                        Navigator.pushNamed(context, '/apps');
+
+                      },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisSize: MainAxisSize.min,

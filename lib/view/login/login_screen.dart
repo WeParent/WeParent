@@ -44,7 +44,7 @@ class _SignInState extends State<SignIn> {
       prefs.setString('FirstName', data['FirstName']);
       prefs.setString('LastName', data['LastName']);
       prefs.setString('ProfilePhoto', data['ProfilePhoto']);
-      prefs.setString('Email', data['Email']);;
+      prefs.setString('Email', data['Email']);
       prefs.setBool('isLoggedIn', true);
       prefs.setBool('Verified', data['Verified']);
       // Login successful, navigate to home screen
@@ -228,52 +228,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                          width: 323,
-                          height: 40,
-                          child: OutlinedButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                              side: MaterialStateProperty.all<BorderSide>(
-                                BorderSide(color: Color(0xFFBC539F), width: 2),
-                              ),
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(28.0),
-                                ),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: Image.asset(
-                                    "Assets/google.png", // Replace with the path to your asset image
 
-                                    // Set the height of the image to match the text
-                                  ),
-                                ),
-                                SizedBox(
-                                    width:
-                                        10), // Add some spacing between the image and text
-                                Text(
-                                  "Continue with Google",
-                                  style: TextStyle(
-                                    color: Color(0xFFBC539F),
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )),
-                    ],
-                  ),
                   SizedBox(height: 30),
                 ],
               ),

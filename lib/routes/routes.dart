@@ -4,6 +4,7 @@ import 'package:weparent/view//ResetPassword/enteremail_screen.dart';
 import 'package:weparent/view//login/login_screen.dart';
 import 'package:weparent/view//signup/signup_screen.dart';
 import 'package:weparent/view//welcome/welcome_screen.dart';
+import 'package:weparent/view/apps/apps_screen.dart';
 import 'package:weparent/view/children/children_screen.dart';
 import 'package:weparent/view/controls/controls_screen.dart';
 import 'package:weparent/view/home/home_screen.dart';
@@ -28,6 +29,7 @@ final Map<String, WidgetBuilder> routes = {
   '/home':(context) => home_screen(),
    '/verifyemail':(context) => EmailVerification(),
   '/verifywarning':(context) =>  EmailVerificationWarning(),
+  '/apps':(context) =>  AppsScreen(),
   '/passwordreset':(context) => PasswordResetScreen(),
   '/navbar':(context) => NavBar(),
   '/children':(context) => ChildrenScreen(),

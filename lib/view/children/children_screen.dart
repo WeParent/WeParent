@@ -115,7 +115,6 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
               prefs.setString('CHILDBUILDID', child.buildNumber.toString());
               Navigator.pushNamed(context, "/controls");
 
-
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
